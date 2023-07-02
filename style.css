@@ -47,3 +47,18 @@ img2{
     font-size: 30px;
     text-align: center;
 }
+
+
+.fields-container { /* css for text boxes*/
+    display: flex;
+    justify-content: space-around;
+    font-size: x-large;
+    color: rgb(136, 208, 74)
+}
+
+#input-button {
+    margin-top: 1vw;
+    color: red;
+    background-color: aqua;
+    border: 2px solid red;
+}

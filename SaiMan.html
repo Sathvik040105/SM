@@ -4,7 +4,7 @@
 <title>SaiMan</title>
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
-<body background="Saimanbackground.webp"></body>>
+<body background="Saimanbackground.webp">
 <p>
 <img src="S.jpg" width="300" height="300">
 </p>
@@ -12,7 +12,30 @@
 <div class = "declaration">
     <div class = "medium-text" style="background-color: #19192749; font-size: x-large;color:rgb(227, 230, 125) ;border: #fbfbfc;">
             <p> Commmunicate with your friends in a more fun way with SaiMan. SaiMan is a fun tool that converts your sentence into a <u>SaiMan</u>(a sequence of emoji's) <u>sentence</u>.                      </p>
-    </div>    
+    </div> 
+
+
+
+    <div class="fields-container"> <!--This code makes three boxes, out of which only one box is editable and rest all are readonly-->  
+        <div>
+            Enter you text here
+            <input type="text" id="input">
+            <br>
+            <button id="input-button">Done</button>
+        </div>
+        <div>
+            <div>
+                Encrypted text 
+                <input type="text" id="encrypted" readonly>
+            </div>
+            <div>
+                Key
+                <input type="text" id="key" readonly>
+            </div>
+        </div>
+    </div>   
 </div>
 </p1>
+<script src="script.js"></script>
+</body>
 </html>
