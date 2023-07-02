@@ -1,3 +1,3 @@
 # SaiMan
 
-This is written by nagasai
+This is written by nagasai and sathvik
