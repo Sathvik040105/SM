@@ -1,111 +1,108 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>SaiMan</title>
-<link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body background="Saimanbackground.webp"></body>
-<p>
-<img src="S.jpg">
-</p>
-<p2>
-<div class = "declaration">
-    <div class = "medium-text" style="background-color: #000000; font-size: x-large;color:rgb(227, 230, 125);border-color: azure;border-width: 20px;">
-            <p> Commmunicate with your friends in a more fun way with SaiMan. SaiMan is a fun tool that converts your sentence into a <u>SaiMan</u>(a sequence of emoji's) <u>sentence</u>.                      </p>
-    </div> 
-</div>
-</p2>
-<p1>
+<meta name="viewport" content="width=device-width, initial-scale=1">   
+<button class="tablink" onclick="openPage('Home', this, 'orange')"id="defaultOpen">Home</button>
+<button class="tablink" onclick="openPage('WhatandHow', this, 'green')">What & How?</button>
+<button class="tablink" onclick="openPage('AboutUs', this, 'purple')">About Us</button>
+
+<div id="image"><img src="iisc.jpg"></img></div>
 
 
-
-    <br>
+<div id="Home" class="tabcontent">
     
-    <br>
+    <head>
+    <title>SaiMan</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body background="Saimanbackground.webp"></body>
+    <p>
+    <img src="S.jpg">
+    </p>
+
+    <p1>
 
 
 
-    <hr
-        style="border: 0;
-        height: 1px;
-        width: 100%;
-        background: #333;
-        background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
-    
+        <br>
+        
+        <br>
 
 
-    <div class="fields-container"> <!--This code makes three boxes, out of which only one box is editable and rest all are readonly-->  
-        <div>
-            Enter you text here :
-            <input type="text" id="input" hspace="20" >
-            <br>
 
-            <button id="input-button"><b>Done</b></button>
-        </div>
-        <div>
+        <hr
+            style="border: 0;
+            height: 1px;
+            width: 100%;
+            background: #333;
+            background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
+        
+
+
+        <div class="fields-container"> <!--This code makes three boxes, out of which only one box is editable and rest all are readonly-->  
             <div>
-                Encrypted text 
-                <input type="text" id="encrypted" readonly>
-            </div>
-            <br>
-            <div>
-                Key
-                <input type="text" id="key" readonly>
-            </div>
-        </div>
-        <div>
-            <button id="restart-button"><b>Restart</b></button>
-        </div>
-    </div> 
+                Enter you text here :
+                <input type="text" id="input" hspace="10">
+                <br>
 
-
-    <hr
-        style="border: 0;
-        height: 1px;
-        background: #333;
-        background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
+                <button id="input-button"><b>Done</b></button>
     
+            </div>
+            <div>
+                <div>
+                    Encrypted text :
+                    <input type="text" id="encrypted" readonly hspace="10">
+                </div>
+                <br>
+                <div>
+                    Key :
+                    <input type="text" id="key" readonly hspace="10">
+                </div>
+            </div>
+            <div>
+                <button id="restart-button"><b>Restart</b></button>
+            </div>
+        </div> 
 
+
+        <hr
+            style="border: 0;
+            height: 1px;
+            background: #333;
+            background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
+        
+    </p1>
+    </div>
 </div>
-</p1>
 
-
-<p3>
-    <h1><b>ABOUT US</b></h1>
+<div id="WhatandHow" class="tabcontent">
+    <p2>
+    <h1><b><u>What & How?</u></b></h1>
+    
     <div class = "declaration">
-        <div class = "medium-text" style="background-color: #3a59a890; font-size: x-large;color:rgb(238, 239, 230);border-color: rgb(76, 220, 220);border-width: 20px; border-radius: 5%; text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
-                <p> We are a group of 2 students from Indian Institute of Science, Banglore. We are currently pursuing our B.Tech in Mathematics and Computing. We are very passionate about coding and we are always looking for new ideas to implement. We are very excited to present our project to you. We hope you like it. </p>
-        </div>
-</p3>
+        <div class = "medium-text" style="background-color: #000000; font-size: large;color:rgb(227, 230, 125);border-color: azure;border-width: 20px;">
+                <p> Commmunicate with your friends in a more fun way with SaiMan. SaiMan is a fun tool that converts your sentence into a <u>SaiMan</u>(a sequence of emoji's) <u>sentence</u>.                      </p>
+        </div> 
+    </div>
+    </p2>
+</div>
 
-<hr>
+<div id="AboutUs" class="tabcontent">
+    <p4>
+        <h2>CONTACT US</h2>
+        <div class = "declaration">
+            <div class = "medium-text" style="background-color: #0a0f1c90; font-size: large;color:rgb(42, 216, 26);border-color: rgb(79, 216, 216);border-width: 20px; border-radius: 5%; text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
+                    <p> <b>EMAIL ID:;</b> nagasaij@iisc.ac.in ; sathvikm@iisc.ac.in</p>
+            </div>
+    </p4>
 
-<p4>
-    <h2>CONTACT US</h2>
-    <div class = "declaration">
-        <div class = "medium-text" style="background-color: #3a59a890; font-size: x-large;color:rgb(42, 216, 26);border-color: rgb(79, 216, 216);border-width: 20px; border-radius: 5%; text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
-                <p> <b>EMAIL ID:;</b> nagasaij@iisc.ac.in ; sathvikm@iisc.ac.in</p>
-        </div>
-</p4>
-
-<hr>
-
-<p5>
-    <h2><b>OUR TEAM</b></h2>
-    <div class = "declaration">
-        <div class = "medium-text" style="background-color: #3a59a890; font-size: xx-large;color:rgb(189, 236, 81);border-color: rgb(76, 220, 220);border-width: 20px; border-radius: 5%; text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
-                <p> <b><u>Sathvik</u></b> <br><br><img src="aboutusvikku.jpg"><br><hr> <b><u>Nagasai</u></b><br><br><img src="aboutusai.jpg"</p>
-        </div>
-</p5>
-
-
-
-
-
-
-
-
-
+    <p5>
+        <h2><b>OUR TEAM</b></h2>
+        <div class = "declaration">
+            <div class = "medium-text" style="background-color: #0a0f1c90; font-size: xx-large;color:rgb(189, 236, 81);border-color: rgb(76, 220, 220);border-width: 20px; border-radius: 5%; text-align: center; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif">
+                    <p> <b><u>Sathvik</u></b> <br><br><img src="aboutusvikku.jpg"><br><hr> <b><u>Nagasai</u></b><br><br><img src="aboutusai.jpg"> </p>
+            </div>
+    </p5>
+</div>
 
 <script src="script.js"></script>
 </html>
