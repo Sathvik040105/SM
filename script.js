@@ -5,22 +5,56 @@ inputButton.addEventListener("click", run);
 let restartButton = document.getElementById("restart-button");
 restartButton.addEventListener("click", restart);
 
+let inputButton2 = document.getElementById("input-button2");
+inputButton2.addEventListener("click", run2);
+
+let restartButton2 = document.getElementById("restart-button2");
+restartButton2.addEventListener("click", restart2);
 
 
 function run() {
-    document.getElementById("encrypted").value = document.getElementById("input").value;
-    //return key value as the sum of all ascii values of the input string
-    let key = 0;
+    let input = document.getElementById("input").value;
+    
+    let prod = 0;
     for (let i = 0; i < document.getElementById("input").value.length; i++) {
-        key += document.getElementById("input").value.charCodeAt(i);
+        prod += document.getElementById("input").value.charCodeAt(i);
     }
+    // Generating a pseudo-random key stream of the same length as the input using the RC4 algorithm
+    let key = Math.floor(Math.random() * input.length*prod);
     document.getElementById("key").value = key;
+    
+    // Encrypting the input using the XOR operation
+    let encrypted = "";
+    for (let i = 0; i < input.length; i++) {
+        encrypted += String.fromCharCode(input.charCodeAt(i) ^ key);
+    }
+    
+    document.getElementById("encrypted").value = encrypted;
 }
+
+function run2() {
+    let input2 = document.getElementById("input2").value;
+    let key2 = document.getElementById("&key").value;
+    // Decrypting the input2 text using the XOR operation
+    let decrypted = "";
+    for (let i = 0; i < input2.length; i++) {
+        decrypted += String.fromCharCode(input2.charCodeAt(i) ^ key2);
+    }
+
+    document.getElementById("decrypted").value = decrypted;
+}
+
 
 function restart() {
     document.getElementById("input").value = "";
     document.getElementById("encrypted").value = "";
     document.getElementById("key").value = "";
+}
+
+function restart2() {
+    document.getElementById("input2").value = "";
+    document.getElementById("&key").value = "";
+    document.getElementById("decrypted").value = "";
 }
 
 function openPage(pageName,elmnt,color) {
