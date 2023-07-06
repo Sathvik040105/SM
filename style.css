@@ -86,12 +86,12 @@ img {
 
 }
 
-#image img{
+#image img {
     image-rendering: auto;
     position: absolute;
     top:0px;
     right:0px;
-    width: 14%;
+    width: 10%;
     height: auto;
     float: right;
     display: flex;
@@ -107,7 +107,7 @@ img {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: rgb(210, 19, 19);
+    background-color: rgb(225, 47, 47);
 }
 .flex-container > div{
     background-color: #a02b2bfd;
@@ -127,6 +127,7 @@ img {
     margin-top: 2vw;
     margin-bottom: 2vw;
     padding: 1vw;
+    background-color: rgba(9, 30, 54, 0.128);
     border: 2px solid rgb(219, 230, 122);
     border-radius: 5%;
     font-size: larger;
