@@ -16,21 +16,51 @@ function run() {
     let input = document.getElementById("input").value;
     
     let prod = 0;
-    for (let i = 0; i < document.getElementById("input").value.length; i++) {
-        prod += document.getElementById("input").value.charCodeAt(i);
+    for (let i = 0; i < input.length; i++) {
+        prod += input.charCodeAt(i);
     }
+
+    const charac = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~`!@#$%^&*()_+=-[];,./<>?:"{}\|';
+    let key1 = "";
+    for (let i = 0; i < (charac.length); i++) {
+        key1 += charac.charAt(Math.floor(Math.random()*(input.length*prod)));
+    }
+
     // Generating a pseudo-random key stream of the same length as the input using the RC4 algorithm
-    let key = Math.floor(Math.random() * input.length*prod);
-    document.getElementById("key").value = key;
+    let key = Math.floor(Math.random() * input.length * prod);
+    let keystr = key.toString();
+
+    function randomCombineStrings(string1, string2) {
+        // Combine the characters of both strings
+        let combinedString = string1 + string2;
+        
+        // Convert the combined string into an array of characters
+        let characters = combinedString.split("");
+        
+        // Shuffle the characters randomly using Fisher-Yates algorithm
+        for (let i=0;i < characters.length; i++) {
+          let j = Math.floor(Math.random() * (i + 1));
+          [characters[i], characters[j]] = [characters[j], characters[i]];
+        }
+        
+        // Join the shuffled characters back into a string
+        let shuffledString = characters.join("");
+        
+        return shuffledString;
+      }
+
+    let finalkey = randomCombineStrings(key1, keystr);
+    document.getElementById("key").value = finalkey;
     
     // Encrypting the input using the XOR operation
     let encrypted = "";
     for (let i = 0; i < input.length; i++) {
-        encrypted += String.fromCharCode(input.charCodeAt(i) ^ key);
+        encrypted += String.fromCharCode(input.charCodeAt(i) ^ finalkey.charCodeAt(i));
     }
     
     document.getElementById("encrypted").value = encrypted;
 }
+
 
 function run2() {
     let input2 = document.getElementById("input2").value;
@@ -38,11 +68,13 @@ function run2() {
     // Decrypting the input2 text using the XOR operation
     let decrypted = "";
     for (let i = 0; i < input2.length; i++) {
-        decrypted += String.fromCharCode(input2.charCodeAt(i) ^ key2);
+        decrypted += String.fromCharCode(input2.charCodeAt(i) ^ key2.charCodeAt(i));
     }
-
+    
     document.getElementById("decrypted").value = decrypted;
 }
+
+
 
 
 function restart() {
