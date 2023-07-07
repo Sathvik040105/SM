@@ -22,8 +22,8 @@ function run() {
 
     const charac = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ~`!@#$%^&*()_+=-[];,./<>?:"{}\|';
     let key1 = "";
-    for (let i = 0; i < (charac.length); i++) {
-        key1 += charac.charAt(Math.floor(Math.random()*(input.length*prod)));
+    for (let i = 0; i < (Math.min(input.length,charac.length)); i++) {
+        key1 += charac.charAt(Math.floor(Math.random()*(charac.length)));
     }
 
     // Generating a pseudo-random key stream of the same length as the input using the RC4 algorithm
