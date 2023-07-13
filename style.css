@@ -106,7 +106,6 @@ img {
 
 .flex-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
     background-color: rgb(225, 47, 47);
 }
@@ -211,6 +210,81 @@ img {
     font-size: 65%;
 }
 
+#input-button3 {
+    background-color: rgb(193, 193, 44);
+    color: rgb(3, 3, 2);
+    border: 1px solid rgb(4, 41, 249);
+    border-radius: 12px;
+    padding: 10px;
+    font-size: large;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+#input-button3:hover {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-style:italic;
+    font-size: 65%;
+
+}
+
+#input-button4 {
+    background-color: rgb(193, 193, 44);
+    color: rgb(3, 3, 2);
+    border: 1px solid rgb(4, 41, 249);
+    border-radius: 12px;
+    padding: 10px;
+    font-size: large;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+#input-button4:hover {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-style:italic;
+    font-size: 65%;
+
+}
+
+
+#restart-button3 {
+    background-color: rgb(49, 218, 83);
+    color: rgb(3, 3, 2);
+    border: 1px solid rgb(140, 112, 232);
+    border-radius: 12px;
+    padding: 10px;
+    font-size: large;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+#restart-button3:hover {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-style:italic;
+    font-size: 65%;
+}
+
+#restart-button4 {
+    background-color: rgb(49, 218, 83);
+    color: rgb(3, 3, 2);
+    border: 1px solid rgb(140, 112, 232);
+    border-radius: 12px;
+    padding: 10px;
+    font-size: large;
+    margin-top: 2vw;
+    margin-bottom: 2vw;
+}
+
+#restart-button4:hover {
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    font-style:italic;
+    font-size: 65%;
+}
+
 #linkedin-button {
     background-color: rgb(240, 247, 241);
     color: rgb(3, 3, 2);
@@ -304,4 +378,31 @@ body, html {
   padding: 100px 20px;
   height: 100%;
 }
+
+
+.tab2 {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 25%;
+}
+
+.tab2:hover {
+  background-color: #777;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent2 {
+  color: white;
+  display: none;
+  padding: 100px 20px;
+  height: 100%;
+}
+
+
 
