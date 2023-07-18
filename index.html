@@ -29,15 +29,18 @@
         
     <br>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <button class="tab2" onclick="openTab('Text', this, 'green')" id="defaultOpen2" style="border: 0.5px solid black;">Text</button>
-    <button class="tab2" onclick="openTab('Image', this, 'orange')" style="border: 0.5px solid black;">Image</button>
+    <button class="tab2" onclick="openTab('Text', this, 'white')" id="defaultOpen2" style="border: 0.5px solid black; border-radius: 50px;">Text</button>
+    <button class="tab2" onclick="openTab('Image', this, 'white')" style="border: 0.5px solid black; border-radius: 20px;">Image</button>
             
+    <br>
+    <br>
     <br>
 
     <hr
     style="border: 0;
-    height: 1px;
-    width: 100%;
+    margin-left: 0%;
+    height: 2px;
+    width: 50%;
     background: #333;
     background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
         
@@ -45,80 +48,181 @@
             
     <div id="Text" class="tab2content">
         <p1>
-            <p9>
-                <b><u>For Encrypting your text</u></b>
-            </p9>
+            
+            <p7 style="font-size: larger;"><u>Select the type of key you need: </u></p7>
+
             <br>
+            <br>
+
+            <label for="keytype"><p7 style="text-align: left; color: #82beff; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Choose key type:</p7></label>
+            <select id="myDropdown" onchange="opensubTab()">
+                <option value="subpage0">Select</option>
+                <option value="subpage1"> System generated</option>
+                <option value="subpage2">User generated</option>
+            </select>
             
-                <div class="fields-container"> <!--This code makes three boxes, out of which only one box is editable and rest all are readonly-->  
-                    <div>
-                        Enter you text here :
-                        <textarea type="text" id="input" hspace="10" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
-                        <br>
-            
-                        <button id="input-button"><b>Done</b></button>
+            <br>
+            <br>
+            <div id="contentcontainer">
+                <div id="subpage0content" class="subpagecontent">
+                    <p10 style="background-color: #0000008a;">Select one option in the above dropdown for generating a key according to your interest.</p10> 
+                </div>
+                <div id="subpage1content" class="subpagecontent">
+                    <p9>
+                        <b><u>For Encrypting your text</u></b>
+                    </p9>
+                    <br>
                 
-                    </div>
-                    <div>
+                    <div class="fields-container"> <!--This code makes three boxes, out of which only one box is editable and rest all are readonly-->  
                         <div>
-                            Encrypted text :
-                            <textarea type="text" id="encrypted" readonly hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
-                        </div>
-                        <br>
-                        <div>
-                            Key :
-                            <textarea type="text" id="key" readonly hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
-                        </div>
-                    </div>
-                    <div>
-                        <button id="restart-button"><b>Restart</b></button>
-                    </div>
-                </div> 
-            
-            
-                <hr
-                    style="border: 0;
-                    height: 1px;
-                    background: #333;
-                    background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
+                            Enter you text here :
+                            <textarea type="text" id="input" hspace="10" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            <br>
                 
-            
-            
-                <p9>
-                    <b><u>For Decrypting your text</u></b>
-                </p9>
+                            <button id="input-button"><b>Done</b></button>
                     
-                <br>
-            
-                <div class="fields-container"> <!--This code makes three boxes, out of which only one box is editable and rest all are readonly-->  
-                    <div>
-                        Enter you Encrypted text here :
-                        <textarea type="text" id="input2" hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
-                        <br><br>
-                            Enter your key here :
-                        <textarea type="text" id="&key" hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
-                        <br>
-                        <button id="input-button2"><b>Done</b></button>
-            
-                    </div>
-                    <div>
-                        <div>
-                            Your Decrypted text :
-                            <textarea type="text" id="decrypted" readonly hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
                         </div>
-                    </div>
-                    <div>
-                        <button id="restart-button2"><b>Restart</b></button>
-                    </div>
-                </div> 
-            
-            
-                <hr
-                    style="border: 0;
-                    height: 1px;
-                    background: #333;
-                    background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
+                        <div>
+                            <div>
+                                Encrypted text :
+                                <textarea type="text" id="encrypted" readonly hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            </div>
+                            <br>
+                            <div>
+                                Key :
+                                <textarea type="text" id="key" readonly hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <button id="restart-button"><b>Restart</b></button>
+                        </div>
+                    </div> 
+                
+                
+                    <hr
+                        style="border: 0;
+                        height: 1px;
+                        background: #333;
+                        background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
+                    
+                
+                
+                    <p9>
+                        <b><u>For Decrypting your text</u></b>
+                    </p9>
                         
+                    <br>
+                
+                    <div class="fields-container"> <!--This code makes three boxes, out of which only one box is editable and rest all are readonly-->  
+                        <div>
+                            Enter you Encrypted text here :
+                            <textarea type="text" id="input2" hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            <br><br>
+                                Enter your key here :
+                            <textarea type="text" id="&key" hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            <br>
+                            <button id="input-button2"><b>Done</b></button>
+                
+                        </div>
+                        <div>
+                            <div>
+                                Your Decrypted text :
+                                <textarea type="text" id="decrypted" readonly hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <button id="restart-button2"><b>Restart</b></button>
+                        </div>
+                    </div> 
+                
+                
+                    <hr
+                        style="border: 0;
+                        height: 1px;
+                        background: #333;
+                        background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
+                </div>
+
+                <div id="subpage2content" class="subpagecontent">
+                    <p9>
+                        <b><u>For Encrypting your text</u></b>
+                    </p9>
+                    <br>
+                
+                    <div class="fields-container"> <!--This code makes three boxes, out of which only one box is editable and rest all are readonly-->  
+                        <div>
+                            Enter you text here :
+                            <textarea type="text" id="input5" hspace="10" style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            <br>
+                            <br>
+                            
+                    
+                        </div>
+                        <div>
+                            Enter your key here :
+                            <textarea type="text" id="key3" hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            <br>
+                            <button id="input-button5"><b>Done</b></button>
+
+                        </div>
+                        <div>
+                            <div>
+                                Encrypted text :
+                                <textarea type="text" id="encrypted3" readonly hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            </div>
+                            <br>
+
+                        </div>
+                        <div>
+                            <button id="restart-button5"><b>Restart</b></button>
+                        </div>
+                    </div> 
+                
+                
+                    <hr
+                        style="border: 0;
+                        height: 1px;
+                        background: #333;
+                        background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
+                    
+                
+                
+                    <p9>
+                        <b><u>For Decrypting your text</u></b>
+                    </p9>
+                        
+                    <br>
+                
+                    <div class="fields-container"> <!--This code makes three boxes, out of which only one box is editable and rest all are readonly-->  
+                        <div>
+                            Enter you Encrypted text here :
+                            <textarea type="text" id="input6" hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            <br><br>
+                                Enter your key here :
+                            <textarea type="text" id="&key3" hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            <br>
+                            <button id="input-button6"><b>Done</b></button>
+                
+                        </div>
+                        <div>
+                            <div>
+                                Your Decrypted text :
+                                <textarea type="text" id="decrypted3" readonly hspace="10"  style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <button id="restart-button6"><b>Restart</b></button>
+                        </div>
+                    </div> 
+                
+                
+                    <hr
+                        style="border: 0;
+                        height: 1px;
+                        background: #333;
+                        background-image: linear-gradient(to right, #ccc, #fefbfb, #ccc);">
+                </div>
+            </div>           
         </p1>
     </div>
 
@@ -141,7 +245,7 @@
                     <div>
                         <div>
                             Encrypted text:
-                            <input type="text" id="encrypted2" readonly hspace="10">
+                            <input type="image" id="encrypted2" readonly hspace="10" src="">
                         </div>
                         <br>
                         <div>

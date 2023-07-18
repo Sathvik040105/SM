@@ -23,6 +23,18 @@ inputButton4.addEventListener("click", run4);
 let restartButton4 = document.getElementById("restart-button4");
 restartButton4.addEventListener("click", restart4);
 
+let inputButton5 = document.getElementById("input-button5");
+inputButton5.addEventListener("click", run5);
+
+let restartButton5 = document.getElementById("restart-button5");
+restartButton5.addEventListener("click", restart5);
+
+let inputButton6 = document.getElementById("input-button6");
+inputButton6.addEventListener("click", run6);
+
+let restartButton6 = document.getElementById("restart-button6");
+restartButton6.addEventListener("click", restart6);
+
 /*function padding(str) {
     let n = 7 - str.length;
     for (let i = 0; i < n; i++) {
@@ -402,13 +414,103 @@ function run2() {
 }
   
 function run3() {
-    let input3 = document.getElementById("input3").value;
-    let dimn = input3.naturalWidth*input3.naturalHeight;
-    let key3 = Math.floor(Math.random() * dimn);
-    let encrypted2 = dimn ^ key3;
-    document.getElementById("encrypted2").value = encrypted2;
-    document.getElementById("key2").value = key3;
+    var imageInput = document.getElementById("input3");
+    var image = imageInput.files[0];
+
+    // Create a new FileReader to read the image file
+    var reader = new FileReader();
+
+    reader.onload = function(e) {
+        var imageSrc = e.target.result;
+
+        // Create a new Image element
+        var img = new Image();
+
+        img.onload = function() {
+            // Create a new canvas element
+            var canvas = document.createElement("canvas");
+            var ctx = canvas.getContext("2d");
+
+            // Set the canvas dimensions to match the image
+            canvas.width = img.width;
+            canvas.height = img.height;
+
+            // Draw the image on the canvas
+            ctx.drawImage(img, 0, 0);
+
+            // Get the pixel data from the canvas
+            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            var data = imageData.data;
+
+            // Loop through the pixels and store the RGB values
+            var rgbValues = {};
+            for (var i = 0; i < data.length; i += 4) {
+                var r = data[i];
+                var g = data[i + 1];
+                var b = data[i + 2];
+                var rgb = r + "," + g + "," + b;
+
+                // Increment the count if the RGB value is already stored
+                if (rgbValues[rgb]) {
+                    rgbValues[rgb]++;
+                } else {
+                    rgbValues[rgb] = 1;
+                }
+            }
+
+            // Loop through the stored RGB values and calculate the average
+            var avgR = 0;
+            var avgG = 0;
+            var avgB = 0;
+            var totalCount = 0;
+            for (var rgb in rgbValues) {
+                var count = rgbValues[rgb];
+                totalCount += count;
+
+                var rgbArr = rgb.split(",");
+                var r = parseInt(rgbArr[0]);
+                var g = parseInt(rgbArr[1]);
+                var b = parseInt(rgbArr[2]);
+
+                avgR += r * count;
+                avgG += g * count;
+                avgB += b * count;
+            }
+
+            avgR /= totalCount;
+            avgG /= totalCount;
+            avgB /= totalCount;
+
+            // XOR each pixel's RGB values with the average RGB values
+            for (var i = 0; i < data.length; i += 4) {
+                data[i] = Math.abs(~(data[i])) //^ Math.round(avgR);
+                data[i + 1] = Math.abs(~(data[i + 1])) //^ Math.round(avgG);
+                data[i + 2] = Math.abs(~(data[i + 2])) //^ Math.round(avgB);
+            }
+
+            // Update the pixel data on the canvas
+            ctx.putImageData(imageData, 0, 0);
+
+            // Set the source of the modified image to the canvas data
+            var encryptedImage = document.getElementById("encrypted2");
+            encryptedImage.src = canvas.toDataURL();
+
+            // Generate the key from the average RGB values
+            var key = String.fromCharCode(Math.floor(avgR) % 128) + String.fromCharCode(Math.floor(avgG) % 128) + String.fromCharCode(Math.floor(avgB) % 128);
+
+
+            // Assuming you have an HTML element with id "key2" to display the key
+            document.getElementById("key2").value = key;
+        };
+
+        // Set the source of the image to the uploaded image
+        img.src = imageSrc;
+    };
+
+    // Read the uploaded image file as data URL
+    reader.readAsDataURL(image);
 }
+
 
 function run4() {
     let input4 = document.getElementById("input4").value;
@@ -416,6 +518,101 @@ function run4() {
     let decrypted2 = input4 ^ key4;
     document.getElementById("decrypted2").value = decrypted2;
 }
+
+function run5() {
+    let input5 = document.getElementById("input5").value;
+    let key5 = document.getElementById("key3").value;
+    let encrypted2 = "";
+    let encrypted2bin = "";
+    //key should have at least one alpha, cap.alpha, num, special.charac and max length of key should be 8.
+    let input5bin = "";
+    for (let i = 0; i < input5.length; i++) {
+        input5bin += padding((input5.charCodeAt(i)).toString(2), 8);
+    }
+    let key5bin = "";
+    for (let j = 0; j < key5.length; j++) {
+        key5bin += padding((key5.charCodeAt(j)).toString(2), 8);
+    }
+
+    if (input5.length <= key5.length) {
+        let updtkey5bin = key5bin.substring(0, input5bin.length);
+        for (let y = 0; y < input5bin.length; y = y + 8) {
+            let encryp2 = (parseInt(input5bin.substring(y, y + 8), 2) ^ parseInt(updtkey5bin.substring(y, y + 8), 2)) + 33;
+            encrypted2bin += (padding(encryp2.toString(2), 8));
+        }
+
+        for (let f = 0; f < encrypted2bin.length; f = f + 8) {
+            encrypted2 += String.fromCharCode(parseInt(encrypted2bin.substring(f, f + 8), 2));
+        }
+    } else if (input5.length > key5.length) {
+        let updtkey5bin0 = key5bin;
+        let n = key5bin.length;
+        while (n < input5bin.length) {
+            updtkey5bin0 += key5bin;
+            n += key5bin.length;
+        }
+        updtkey5bin0 = updtkey5bin0.substring(0, input5bin.length);
+        for (let y = 0; y < input5bin.length; y = y + 8) {
+            let encryp2 = (parseInt(input5bin.substring(y, y + 8), 2) ^ parseInt(updtkey5bin0.substring(y, y + 8), 2)) + 33;
+            encrypted2bin += (padding(encryp2.toString(2), 8));
+        }
+
+        for (let f = 0; f < encrypted2bin.length; f = f + 8) {
+            encrypted2 += String.fromCharCode(parseInt(encrypted2bin.substring(f, f + 8), 2));
+        }
+
+    }
+    document.getElementById("encrypted3").value = encrypted2;
+}
+
+
+function run6(){
+    let input6 = document.getElementById("input6").value
+    let key6 = document.getElementById("&key3").value
+    let decrypted2 = "";
+    let decrypted2bin = "";
+    let input6bin = "";
+    for (let i = 0; i < input6.length; i++) {
+        input6bin += padding((input6.charCodeAt(i)).toString(2), 8);
+    }
+    let key6bin = "";
+    for (let j = 0; j < key6.length; j++) {
+        key6bin += padding((key6.charCodeAt(j)).toString(2), 8);
+    }
+
+    if (input6.length <= key6.length) {
+        let updtkey6bin = key6bin.substring(0, input6bin.length);
+        for (let y = 0; y < input6bin.length; y = y + 8) {
+            let decryp2 = ((parseInt(input6bin.substring(y, y + 8), 2)-33) ^ parseInt(updtkey6bin.substring(y, y + 8), 2)) //% 223 + 33;
+            decrypted2bin += (padding(decryp2.toString(2), 8));
+        }
+
+        for (let f = 0; f < decrypted2bin.length; f = f + 8) {
+            decrypted2 += String.fromCharCode(parseInt(decrypted2bin.substring(f, f + 8), 2));
+        }
+    } else if (input6.length > key6.length) {
+        let updtkey6bin0 = key6bin;
+        let n = key6bin.length;
+        while (n < input6bin.length) {
+            updtkey6bin0 += key6bin;
+            n += key6bin.length;
+        }
+        updtkey6bin0 = updtkey6bin0.substring(0, input6bin.length);
+        for (let y = 0; y < input6bin.length; y = y + 8) {
+            let decryp2 = ((parseInt(input6bin.substring(y, y + 8), 2)-33) ^ parseInt(updtkey6bin0.substring(y, y + 8), 2)) //% 223 + 33;
+            decrypted2bin += (padding(decryp2.toString(2), 8));
+        }
+
+        for (let f = 0; f < decrypted2bin.length; f = f + 8) {
+            decrypted2 += String.fromCharCode(parseInt(decrypted2bin.substring(f, f + 8), 2));
+        }
+
+    }
+    document.getElementById("decrypted3").value = decrypted2;
+}
+
+
+
 
 function restart() {
     document.getElementById("input").value = "";
@@ -431,7 +628,7 @@ function restart2() {
 
 function restart3() {
     document.getElementById("input3").value = "";
-    document.getElementById("encrypted2").value = "";
+    document.getElementById("encrypted2").src = "";
     document.getElementById("key2").value = "";
 }
 
@@ -440,6 +637,19 @@ function restart4() {
     document.getElementById("&key2").value = "";
     document.getElementById("decrypted2").value = "";
 }
+
+function restart5(){
+    document.getElementById("input5").value = "";
+    document.getElementById("encrypted3").value = "";
+    document.getElementById("key3").value = "";
+}
+
+function restart6(){
+    document.getElementById("input6").value = "";
+    document.getElementById("&key3").value = "";
+    document.getElementById("decrypted3").value = "";
+}
+
 
 function openPage(pageName,elmnt,color) {
     var i, tabcontent, tablinks;
@@ -475,7 +685,39 @@ function openTab(tabName,elmnt,color) {
   // Get the element with id="defaultOpen" and click on it
   document.getElementById("defaultOpen2").click();
 
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("myDropdown").value = "subpage0"; // Set the value of the dropdown to "subpage1"
+    opensubTab(); // Call the opensubTab function on page load to display the selected content
+});
+
+function opensubTab() {
+    var dropdown = document.getElementById("myDropdown");
+    var selectedOption = dropdown.value;
+    
+    var contentcontainer = document.getElementById("contentcontainer");
+    var subpagecontents = contentcontainer.querySelectorAll(".subpagecontent");
+
+    if (subpagecontents) {
+        for (var i = 0; i < subpagecontents.length; i++) {
+            subpagecontents[i].style.display = "none";
+        }
+    }
+
+    if (selectedOption !== "") {
+        var selectedcontent = document.getElementById(selectedOption + "content");
+        if (selectedcontent) {
+            selectedcontent.style.display = "block";
+        }
+    }
+}
+document.getElementById("defaultOpen3").onselect()
+
   
+
+
+
+
 let linkedinsathvButton = document.getElementById("linkedin-button");
 linkedinsathvButton.addEventListener("click", website);
   
