@@ -237,6 +237,7 @@
                     <div>
                         Enter you image here :
                         <input type="file" id="input3" hspace="10">
+                        
                         <br>
             
                         <button id="input-button3"><b>Done</b></button>
@@ -244,13 +245,14 @@
                     </div>
                     <div>
                         <div>
-                            Encrypted text:
+                            Encrypted image:
                             <input type="image" id="encrypted2" readonly hspace="10" src="">
                         </div>
                         <br>
                         <div>
                             Key :
-                            <input type="text" id="key2" readonly hspace="10">
+                            <textarea type="text" id="key2" readonly hspace="10"></textarea>
+                            <button id="copybutton"><b>Copy</b></button>
                         </div>
                     </div>
                     <div>
@@ -276,10 +278,10 @@
                 <div class="fields-container"> <!--This code makes three boxes, out of which only one box is editable and rest all are readonly-->  
                     <div>
                         Enter you Encrypted text here :
-                        <textarea type="text" id="input4" hspace="10"></textarea>
+                        <input type="file" id="input4" hspace="10">
                         <br><br>
                             Enter your key here :
-                        <input type="text" id="&key2" hspace="10">
+                        <textarea type="text" id="&key2" hspace="10"></textarea>
                         <br>
                         <button id="input-button4"><b>Done</b></button>
             
@@ -287,7 +289,7 @@
                     <div>
                         <div>
                             Your Decrypted image :
-                            <input type="file" id="decrypted2" readonly hspace="10">
+                            <input type="image" id="decrypted2" readonly hspace="10" src="">
                         </div>
                     </div>
                     <div>
@@ -367,6 +369,8 @@
             </div>
     </p5>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 
 <script src="script.js"></script>
 </html>

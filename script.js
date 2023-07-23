@@ -14,6 +14,9 @@ restartButton2.addEventListener("click", restart2);
 let inputButton3 = document.getElementById("input-button3");
 inputButton3.addEventListener("click", run3);
 
+let copybutton = document.getElementById("copybutton");
+copybutton.addEventListener("click", copy);
+
 let restartButton3 = document.getElementById("restart-button3");
 restartButton3.addEventListener("click", restart3);
 
@@ -412,22 +415,114 @@ function run2() {
     }
     document.getElementById("decrypted").value = decrypted;
 }
+
+function copy() {
+    let copyText = document.getElementById("key2");
+    copyText.select();
+    document.execCommand("copy");
+}
+
+function shuffleArray(array) {
+    let string = "";
+    for (let i = array.length - 1; i >= 0; i--) {
+      string += String(i).padStart(String(array.length-1).length, '0') + ",";
+      const j = Math.floor(Math.random() * (i + 1));
+      string += String(j).padStart(String(array.length-1).length, '0') + ",";
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return [array, string.slice(0, -1)]; // Remove the last "," from the string
+}
   
-function run3() {
+  
+  function run3() {
     var imageInput = document.getElementById("input3");
+    var image = imageInput.files[0];
+  
+    // Create a new FileReader to read the image file
+    var reader = new FileReader();
+  
+    reader.onload = function (e) {
+      var imageSrc = e.target.result;
+  
+      // Create a new Image element
+      var img = new Image();
+  
+      img.onload = function () {
+        // Create a new canvas element
+        var canvas = document.createElement("canvas");
+        var ctx = canvas.getContext("2d");
+  
+        // Set the canvas dimensions to match the image
+        canvas.width = img.width;
+        canvas.height = img.height;
+  
+        // Draw the image on the canvas
+        ctx.drawImage(img, 0, 0);
+  
+        // Get the pixel data from the canvas
+        let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let data = imageData.data; // Assuming data is a Uint8ClampedArray
+  
+        // Assuming you have a function to generate the key
+  
+        let [shuffledData, finalkey2String] = shuffleArray(data);
+        // Now, 'shuffledData' contains the shuffled Uint8ClampedArray
+  
+        imageData.data.set(shuffledData);
+        // Set the data back to the canvas
+        ctx.putImageData(imageData, 0, 0); // Update the canvas
+  
+        var encryptedImage = document.getElementById("encrypted2");
+        encryptedImage.src = canvas.toDataURL();
+  
+        // Assuming you have an HTML element with id "key2" to display the key
+        document.getElementById("key2").value = finalkey2String;
+      };
+  
+      // Set the source of the image to the uploaded image
+      img.src = imageSrc;
+    };
+  
+    // Read the uploaded image file as data URL
+    reader.readAsDataURL(image);
+  }
+  
+
+function unshuffleArray(array, string) {
+    // Parse the indices from the 'string'
+    const indices = [];
+    const stringArray = string.split(",");
+    for (let i = 0; i < stringArray.length; i += 2) {
+      const iIndex = parseInt(stringArray[i], 10);
+      const jIndex = parseInt(stringArray[i + 1], 10);
+      indices.push({ i: iIndex, j: jIndex });
+    }
+
+    // Reverse the shuffle operation by applying the same set of indices in reverse
+    for (let k = indices.length - 1; k >= 0; k--) {
+      const { i: iIndex, j: jIndex } = indices[k];
+      [array[iIndex], array[jIndex]] = [array[jIndex], array[iIndex]];
+    }
+  
+    return array;
+  }
+  
+  
+  
+  function run4() {
+    var imageInput = document.getElementById("input4");
     var image = imageInput.files[0];
 
     // Create a new FileReader to read the image file
     var reader = new FileReader();
 
-    reader.onload = function(e) {
+    reader.onload = function (e) {
         var imageSrc = e.target.result;
 
         // Create a new Image element
         var img = new Image();
 
-        img.onload = function() {
-            // Create a new canvas element
+        img.onload = function () {
             var canvas = document.createElement("canvas");
             var ctx = canvas.getContext("2d");
 
@@ -439,68 +534,21 @@ function run3() {
             ctx.drawImage(img, 0, 0);
 
             // Get the pixel data from the canvas
-            var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            var data = imageData.data;
+            let imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            let data = imageData.data; // Assuming data is a Uint8ClampedArray
 
-            // Loop through the pixels and store the RGB values
-            var rgbValues = {};
-            for (var i = 0; i < data.length; i += 4) {
-                var r = data[i];
-                var g = data[i + 1];
-                var b = data[i + 2];
-                var rgb = r + "," + g + "," + b;
+            // Assuming you have an HTML element with id "&key2" to display the key
+            let finalkey2String = document.getElementById("&key2").value;
 
-                // Increment the count if the RGB value is already stored
-                if (rgbValues[rgb]) {
-                    rgbValues[rgb]++;
-                } else {
-                    rgbValues[rgb] = 1;
-                }
-            }
+            let unshuffledData = unshuffleArray(data, finalkey2String);
+            // Now, 'unshuffledData' contains the unshuffled Uint8ClampedArray
 
-            // Loop through the stored RGB values and calculate the average
-            var avgR = 0;
-            var avgG = 0;
-            var avgB = 0;
-            var totalCount = 0;
-            for (var rgb in rgbValues) {
-                var count = rgbValues[rgb];
-                totalCount += count;
+            imageData.data.set(unshuffledData);
+            // Set the data back to the canvas
+            ctx.putImageData(imageData, 0, 0); // Update the canvas
 
-                var rgbArr = rgb.split(",");
-                var r = parseInt(rgbArr[0]);
-                var g = parseInt(rgbArr[1]);
-                var b = parseInt(rgbArr[2]);
-
-                avgR += r * count;
-                avgG += g * count;
-                avgB += b * count;
-            }
-
-            avgR /= totalCount;
-            avgG /= totalCount;
-            avgB /= totalCount;
-
-            // XOR each pixel's RGB values with the average RGB values
-            for (var i = 0; i < data.length; i += 4) {
-                data[i] = Math.abs(~(data[i])) //^ Math.round(avgR);
-                data[i + 1] = Math.abs(~(data[i + 1])) //^ Math.round(avgG);
-                data[i + 2] = Math.abs(~(data[i + 2])) //^ Math.round(avgB);
-            }
-
-            // Update the pixel data on the canvas
-            ctx.putImageData(imageData, 0, 0);
-
-            // Set the source of the modified image to the canvas data
-            var encryptedImage = document.getElementById("encrypted2");
-            encryptedImage.src = canvas.toDataURL();
-
-            // Generate the key from the average RGB values
-            var key = String.fromCharCode(Math.floor(avgR) % 128) + String.fromCharCode(Math.floor(avgG) % 128) + String.fromCharCode(Math.floor(avgB) % 128);
-
-
-            // Assuming you have an HTML element with id "key2" to display the key
-            document.getElementById("key2").value = key;
+            var decryptedImage = document.getElementById("decrypted2");
+            decryptedImage.src = canvas.toDataURL();
         };
 
         // Set the source of the image to the uploaded image
@@ -509,15 +557,8 @@ function run3() {
 
     // Read the uploaded image file as data URL
     reader.readAsDataURL(image);
-}
-
-
-function run4() {
-    let input4 = document.getElementById("input4").value;
-    let key4 = document.getElementById("&key2").value;
-    let decrypted2 = input4 ^ key4;
-    document.getElementById("decrypted2").value = decrypted2;
-}
+  }
+  
 
 function run5() {
     let input5 = document.getElementById("input5").value;
@@ -635,7 +676,7 @@ function restart3() {
 function restart4() {
     document.getElementById("input4").value = "";
     document.getElementById("&key2").value = "";
-    document.getElementById("decrypted2").value = "";
+    document.getElementById("decrypted2").src = "";
 }
 
 function restart5(){
