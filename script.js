@@ -766,11 +766,11 @@ let linkedinsaiButton = document.getElementById("linkedin-button1");
 linkedinsaiButton.addEventListener("click", website1);
 
 function website() {
-    window.open(URL="https://www.linkedin.com/in/sathvik-manthri-365984259/");
+    window.open("https://www.linkedin.com/in/sathvik-manthri-365984259/");
 }
 
 function website1() {
-    window.open(URL="https://www.linkedin.com/in/nagasai-jajapuram-1b8a73273/");
+    window.open("https://www.linkedin.com/in/nagasai-jajapuram-1b8a73273/");
 }
 
 let gitsathvButton = document.getElementById("git-button");
@@ -780,9 +780,9 @@ let gitsaiButton = document.getElementById("git-button1");
 gitsaiButton.addEventListener("click", website3);
 
 function website2() {
-    window.open(URL="https://github.com/Sathvik040105/");
+    window.open("https://github.com/Sathvik040105/");
 }
 
 function website3() {
-    window.open(URL="https://github.com/Nagasai561/");
+    window.open("https://github.com/Nagasai561/");
 }
